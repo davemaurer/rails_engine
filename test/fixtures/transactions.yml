@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  invoice_id: 
+  credit_card_number: MyString
+  result: MyString
+  created_at: 2015-07-27 16:23:21
+  updated_at: 2015-07-27 16:23:21
+
+two:
+  invoice_id: 
+  credit_card_number: MyString
+  result: MyString
+  created_at: 2015-07-27 16:23:21
+  updated_at: 2015-07-27 16:23:21
