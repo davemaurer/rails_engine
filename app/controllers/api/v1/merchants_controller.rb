@@ -1,33 +1,19 @@
 class Api::V1::MerchantsController < ApplicationController
   respond_to :json, :xml
 
-  def index
-    respond_with Merchant.all
-  end
-
   def show
     respond_with Merchant.find_by(id: params[:id])
-  end
-
-  def create
-    respond_with Merchant.create(merchant_params)
-  end
-
-  def update
-    respond_with Merchant.update(params[:id], merchant_params)
-  end
-
-  def destroy
-    respond_with Merchant.destroy(params[:id])
   end
 
   def random
     respond_with Merchant.all.sample
   end
 
-  private
+  def search
+    respond_with Merchant.find_by(search_param)
+  end
 
-  def merchant_params
-    params.require(:merchant).permit(:name)
+  def search_all
+    respond_with Merchant.find_by(search_param)
   end
 end
