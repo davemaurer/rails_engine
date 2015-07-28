@@ -25,6 +25,14 @@ class Api::V1::TransactionsController < ApplicationController
     respond_with Transaction.all.sample
   end
 
+  def find
+    respond_with Transaction.where
+  end
+
+  def find_all
+
+  end
+
   private
 
   def transaction_params
