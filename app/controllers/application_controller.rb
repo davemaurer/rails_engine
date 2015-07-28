@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   def search_param
+    binding.pry
     return params.symbolize_keys.keys.first => params[params.symbolize_keys.keys.first]
   end
 
