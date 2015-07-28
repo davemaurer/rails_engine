@@ -1,4 +1,6 @@
 class Invoice < ActiveRecord::Base
+  include SearchAll
+
   belongs_to :customer
   belongs_to :merchant
   has_many :transactions

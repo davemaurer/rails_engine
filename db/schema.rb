@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150727222442) do
+ActiveRecord::Schema.define(version: 20150728160503) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20150727222442) do
     t.string   "result"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "credit_card_expiration_date"
   end
 
   add_index "transactions", ["invoice_id"], name: "index_transactions_on_invoice_id", using: :btree
