@@ -1,4 +1,4 @@
-# require 'active_support/conern'
+# require 'active_support/concern'
 
 module SearchAll
   extend ActiveSupport::Concern
