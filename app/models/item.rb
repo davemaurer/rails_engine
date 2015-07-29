@@ -1,9 +1,9 @@
 class Item < ActiveRecord::Base
   include SearchAll
 
+  validates_presence_of :name, :description, :merchant_id
+
   belongs_to :merchant
-
-  def self.find_all_by
-
-  end
+  has_many :invoice_items
+  has_many :invoices, through: :invoice_items
 end
