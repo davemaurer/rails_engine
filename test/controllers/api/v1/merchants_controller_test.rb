@@ -34,12 +34,4 @@ class Api::V1::MerchantsControllerTest < ActionController::TestCase
     assert_equal merchant.id, merchant_response['id']
     assert_equal 'Google', merchant_response['name']
   end
-
-  test "returns 404 with no params" do
-    merchant = Merchant.create(name: "google")
-
-    get :find, format: :json
-
-    assert_equal "404", response.code
-  end
 end

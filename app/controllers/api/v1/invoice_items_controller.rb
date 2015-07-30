@@ -9,6 +9,14 @@ class Api::V1::InvoiceItemsController < ApplicationController
     respond_with InvoiceItem.all.sample
   end
 
+  def invoice
+    respond_with invoice_item.invoice
+  end
+
+  def item
+    respond_with invoice_item.item
+  end
+
   def find
     respond_with InvoiceItem.find_by(search_param)
   end
@@ -17,13 +25,7 @@ class Api::V1::InvoiceItemsController < ApplicationController
     respond_with InvoiceItem.where(search_param)
   end
 
-  def invoice
-    respond_with invoice_item.invoice
-  end
-
-  def item
-    respond_with invoice_item.item
-  end
+  private
 
   def invoice_item
     InvoiceItem.find_by(id: params[:id])
