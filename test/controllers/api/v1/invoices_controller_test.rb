@@ -90,4 +90,46 @@ class Api::V1::InvoicesControllerTest < ActionController::TestCase
 
     assert_equal 2, invoices_response.count
   end
+
+  test "find_all returns all invoices by merchant id" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+
+    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+
+    get :find_all, format: :json, merchant_id: merchant.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+
+    get :find_all, format: :json, merchant_id: merchant.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all invoices by customer id" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+
+    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+
+    get :find_all, format: :json, customer_id: customer.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+
+    get :find_all, format: :json, customer_id: customer.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
 end

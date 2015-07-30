@@ -93,21 +93,93 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
 
     assert_equal invoice_item.invoice_id, invoice_item_response["invoice_id"]
   end
-  test "find_all returns all invoice items by status" do
-    customer = Customer.create(first_name: "bob", last_name: "barker")
+  
+  test "find_all returns all invoice items by quantity" do
     merchant = Merchant.create(name: "tesla")
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
-    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
-    get :find_all, format: :json, status: "limbo"
+    get :find_all, format: :json, quantity: "3"
 
     invoices_response = JSON.parse(response.body)
 
     assert_equal 1, invoices_response.count
 
-    Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "limbo")
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
-    get :find_all, format: :json, status: "limbo"
+    get :find_all, format: :json, quantity: "3"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all invoice items by unit_price" do
+    merchant = Merchant.create(name: "tesla")
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, unit_price: 100
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, unit_price: 100
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all invoice items by item_id" do
+    merchant = Merchant.create(name: "tesla")
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, item_id: item.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, item_id: item.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all invoice items by invoice id" do
+    merchant = Merchant.create(name: "tesla")
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, invoice_id: invoice.id
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
+
+    get :find_all, format: :json, invoice_id: invoice.id
 
     invoices_response = JSON.parse(response.body)
 

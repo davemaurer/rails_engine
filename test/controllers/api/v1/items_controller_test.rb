@@ -74,4 +74,64 @@ class Api::V1::ItemsControllerTest < ActionController::TestCase
 
     assert_equal item.merchant_id, invoice_item_response["merchant_id"]
   end
+
+  test "find_all returns all items by description" do
+    merchant = Merchant.create(name: "tesla")
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, description: "rad"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, description: "rad"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all items by name" do
+    merchant = Merchant.create(name: "tesla")
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, name: "item1"
+
+    items_response = JSON.parse(response.body)
+
+    assert_equal 1, items_response.count
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, name: "item1"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns all items by unit_price" do
+    merchant = Merchant.create(name: "tesla")
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, unit_price: 5
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :find_all, format: :json, unit_price: 5
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
 end

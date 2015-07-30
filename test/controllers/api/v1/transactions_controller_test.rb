@@ -73,4 +73,48 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
 
     assert_equal "touchdown!", invoice_response["result"]
   end
+
+  test "find_all returns transactions by result" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+
+    Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
+
+    get :find_all, format: :json, result: "touchdown!"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
+
+    get :find_all, format: :json, result: "touchdown!"
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
+
+  test "find_all returns transactions by credit card number" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+
+    Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
+
+    get :find_all, format: :json, credit_card_number: 555555555555555
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 1, invoices_response.count
+
+    Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
+
+    get :find_all, format: :json, credit_card_number: 555555555555555
+
+    invoices_response = JSON.parse(response.body)
+
+    assert_equal 2, invoices_response.count
+  end
 end
