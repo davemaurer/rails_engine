@@ -1,6 +1,19 @@
 require 'test_helper'
 
 class Api::V1::ItemsControllerTest < ActionController::TestCase
+  test "show returns invoice by id" do
+    merchant = Merchant.create(name: "tesla")
+
+    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+
+    get :show, format: :json, id: item.id
+
+    item_response = JSON.parse(response.body)
+
+    assert_equal item.id, item_response["id"]
+    assert_equal "rad", item_response["description"]
+  end
+
   test "find returns item by id" do
     merchant = Merchant.create(name: "tesla")
 

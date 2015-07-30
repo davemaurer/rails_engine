@@ -1,10 +1,21 @@
 require 'test_helper'
 
 class Api::V1::MerchantsControllerTest < ActionController::TestCase
+  test "show returns merchant by id" do
+    merchant = Merchant.create(name: "google")
+
+    get :show, format: :json, id: merchant.id
+
+    merchant_response = JSON.parse(response.body)
+
+    assert_equal merchant.id, merchant_response["id"]
+    assert_equal "google", merchant_response["name"]
+  end
+
   test "find returns merchant by id" do
     merchant = Merchant.create(name: "google")
 
-    get :find, format: :json, id: merchant.id.to_s
+    get :find, format: :json, id: merchant.id
 
     merchant_response = JSON.parse(response.body)
 

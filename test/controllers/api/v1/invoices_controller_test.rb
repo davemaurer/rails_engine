@@ -1,6 +1,20 @@
 require 'test_helper'
 
 class Api::V1::InvoicesControllerTest < ActionController::TestCase
+  test "show returns invoice by id" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+
+    get :show, format: :json, id: invoice.id
+
+    invoice_response = JSON.parse(response.body)
+
+    assert_equal invoice.id, invoice_response["id"]
+    assert_equal "shipped", invoice_response["status"]
+  end
+
   test "find returns invoice by id" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")

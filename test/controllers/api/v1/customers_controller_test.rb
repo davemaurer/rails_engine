@@ -1,6 +1,17 @@
 require 'test_helper'
 
 class Api::V1::CustomersControllerTest < ActionController::TestCase
+  test "show returns customer by id" do
+    customer = Customer.create(first_name: "john", last_name: "doe")
+
+    get :show, format: :json, id: customer.id
+
+    customer_response = JSON.parse(response.body)
+
+    assert_equal customer.id, customer_response["id"]
+    assert_equal "john", customer_response["first_name"]
+  end
+
   test "find returns customer by id" do
     customer = Customer.create(first_name: "john", last_name: "doe")
 

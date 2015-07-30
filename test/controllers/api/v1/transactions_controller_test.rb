@@ -1,6 +1,22 @@
 require 'test_helper'
 
 class Api::V1::TransactionsControllerTest < ActionController::TestCase
+  test "show returns invoice by id" do
+    customer = Customer.create(first_name: "bob", last_name: "barker")
+    merchant = Merchant.create(name: "tesla")
+    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+
+    transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
+
+    get :show, format: :json, id: transaction.id
+
+    transaction_response = JSON.parse(response.body)
+
+    assert_equal transaction.id, transaction_response["id"]
+    assert_equal "touchdown!", transaction_response["result"]
+  end
+
+
   test "find returns transaction by id" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")

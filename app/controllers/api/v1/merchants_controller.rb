@@ -17,6 +17,14 @@ class Api::V1::MerchantsController < ApplicationController
     respond_with merchant.invoices
   end
 
+  def revenue
+    respond_with Merchant.find_by(id: params[:id]).total_revenue
+  end
+
+  def favorite_customer
+    respond_with Merchant.find_by(id: params[:id]).favorite.customer
+  end
+
   def find
     if param_value.to_i == 0
       respond_with Merchant.match_one(param_key, param_value)
