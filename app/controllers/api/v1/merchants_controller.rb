@@ -29,7 +29,7 @@ class Api::V1::MerchantsController < ApplicationController
     if param_value.to_i == 0
       respond_with Merchant.match_one(param_key, param_value)
     else
-      respond_with Merchant.find_by(search_param)
+      respond_with Merchant.find_by(parameters)
     end
   end
 

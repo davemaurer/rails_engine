@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   def search_param
     return params.symbolize_keys.keys.first => params[params.symbolize_keys.keys.first]
   end
+  # rails solution does the same as the lines above
+  def parameters
+    request.query_parameters
+  end
 
   def param_key
     params.symbolize_keys.keys.first

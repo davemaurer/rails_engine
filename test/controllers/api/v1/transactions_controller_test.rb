@@ -4,7 +4,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "show returns invoice by id" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -20,7 +20,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find returns transaction by id" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -35,7 +35,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find returns transaction by invoice id" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -49,7 +49,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find returns transaction by credit card number" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -63,7 +63,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find returns transaction by result" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     transaction = Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -77,7 +77,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find_all returns transactions by result" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 
@@ -99,7 +99,7 @@ class Api::V1::TransactionsControllerTest < ActionController::TestCase
   test "find_all returns transactions by credit card number" do
     customer = Customer.create(first_name: "bob", last_name: "barker")
     merchant = Merchant.create(name: "tesla")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
 
     Transaction.create(invoice_id: invoice.id, credit_card_number: 555555555555555, result: "touchdown!")
 

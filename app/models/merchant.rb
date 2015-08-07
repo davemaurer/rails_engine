@@ -13,6 +13,6 @@ class Merchant < ActiveRecord::Base
   end
 
   def favorite_customer
-    Customer.find(invoices.successful.best_customer_id)
+    Customer.find(invoices.successful.favorite_customer_id)
   end
 end

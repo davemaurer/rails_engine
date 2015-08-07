@@ -4,8 +4,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "show returns invoice by id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -20,8 +20,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find returns invoice_item by id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -36,8 +36,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find returns invoice_item by item id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -52,8 +52,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find returns invoice_item by quantity" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -67,8 +67,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find returns invoice_item by unit_price" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -82,8 +82,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find returns invoice_item by invoice_id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     invoice_item = InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -93,12 +93,12 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
 
     assert_equal invoice_item.invoice_id, invoice_item_response["invoice_id"]
   end
-  
+
   test "find_all returns all invoice items by quantity" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -120,8 +120,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find_all returns all invoice items by unit_price" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -143,8 +143,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find_all returns all invoice items by item_id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
@@ -166,8 +166,8 @@ class Api::V1::InvoiceItemsControllerTest < ActionController::TestCase
   test "find_all returns all invoice items by invoice id" do
     merchant = Merchant.create(name: "tesla")
     customer = Customer.create(first_name: "bob", last_name: "barker")
-    invoice = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
-    item = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
+    invoice  = Invoice.create(customer_id: customer.id, merchant_id: merchant.id, status: "shipped")
+    item     = Item.create(name: "item1", description: "rad", unit_price: 5, merchant_id: merchant.id)
 
     InvoiceItem.create(item_id: item.id, invoice_id: invoice.id, quantity: 3, unit_price: 100)
 
